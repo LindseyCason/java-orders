@@ -1,6 +1,8 @@
 package com.lambdaschool.javaorders.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +14,7 @@ public class Agent {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long agentcode;
 
-    @Column(unique = true, nullable = false)
+//    @Column(unique = true, nullable = false)
     private String agentname;
     private String workingarea;
     private double commission;
@@ -20,7 +22,8 @@ public class Agent {
     private String country;
 
 
-    @OneToMany(mappedBy = "agentcode")
+    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("agent")
     private List<Customer> customers = new ArrayList<>();
 
     public Agent() {

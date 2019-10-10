@@ -40,7 +40,7 @@ public class CustomerServiceImpl implements CustomerService
         newCustomer.setOutstandingamt(customer.getOutstandingamt());
         newCustomer.setPhone(customer.getPhone());
 
-        return null;
+        return custrepo.save(newCustomer);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.lambdaschool.javaorders.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +27,13 @@ public class Customer {
     private String phone;
 
     @ManyToOne
-    @JoinColumn(name = "agents", nullable = false)
-    private Agent agentcode;
+    @JoinColumn(name = "agentcode", nullable = false)
+    @JsonIgnoreProperties("customers")
+    private Agent agent;
 
-    @OneToMany(mappedBy = "ordnum",
+    @OneToMany(mappedBy = "customer",
     cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("customer")
     private List<Order> orders = new ArrayList<>();
 
     public Customer() {
@@ -37,7 +41,7 @@ public class Customer {
     }
 
 
-    public Customer(String custname, String custcity, String workingarea, String custcountry, String grade, double openingamt, double receiveamt, double paymentamt, double outstandingamt, String phone, Agent agentcode) {
+    public Customer(String custname, String custcity, String workingarea, String custcountry, String grade, double openingamt, double receiveamt, double paymentamt, double outstandingamt, String phone, Agent agent) {
         this.custname = custname;
         this.custcity = custcity;
         this.workingarea = workingarea;
@@ -48,7 +52,7 @@ public class Customer {
         this.paymentamt = paymentamt;
         this.outstandingamt = outstandingamt;
         this.phone = phone;
-        this.agentcode = agentcode;
+        this.agent = agent;
 
 
     }
@@ -133,12 +137,12 @@ public class Customer {
         this.phone = phone;
     }
 
-    public Agent getAgentcode() {
-        return agentcode;
+    public Agent getAgent() {
+        return agent;
     }
 
-    public void setAgentcode(Agent agentcode) {
-        this.agentcode = agentcode;
+    public void setAgent(Agent agent) {
+        this.agent = agent;
     }
 
     public double getOutstandingamt() {

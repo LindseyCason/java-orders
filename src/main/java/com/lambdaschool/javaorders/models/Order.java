@@ -14,18 +14,19 @@ public class Order {
 
 
     @ManyToOne
-    @JoinColumn(name = "customers", nullable = false)
-    private Customer custcode;
+    @JoinColumn(name = "custcode", nullable = false)
+    private Customer customer;
 
     private String orddescription;
 
     public Order() {
     }
 
-    public Order(double ordamount, double advanceamount, Customer custcode, String orddescription) {
+    public Order(double ordamount, double advanceamount, Customer customer, String orddescription) {
         this.ordamount = ordamount;
         this.advanceamount = advanceamount;
         this.orddescription = orddescription;
+        this.customer=customer;
     }
 
     public long getOrdnum() {
@@ -52,13 +53,13 @@ public class Order {
         this.advanceamount = advanceamount;
     }
 
-    public Customer getCustcode() {
-        return custcode;
+    public Customer getCustomer() {
+        return customer;
     }
 
 //    public void setCustcode(long custcode) {
-//        this.custcode = custcode;
-//    }
+////        this.custcode = custcode;
+////    }
 
     public String getOrddescription() {
         return orddescription;

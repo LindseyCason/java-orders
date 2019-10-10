@@ -19,6 +19,7 @@ public class CustomerController {
     //POST http://localhost:2019/customer/new
     //PUT http://localhost:2019/customer/update/{custcode}
     //DELETE http://localhost:2019/customer/delete/{custcode}
+
     @GetMapping(value="/order", produces = {"application/json"})
     public ResponseEntity<?> listAllCustomers(){
         List<Customer> myCustList= customerService.findCust();
