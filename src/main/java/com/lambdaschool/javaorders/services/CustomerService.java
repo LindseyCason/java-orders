@@ -10,7 +10,7 @@ public interface CustomerService {
     List<Customer> findCust();
 
     //Adds a new customer including any new orders
-    Customer addCust(Customer newCustomer);
+    Customer save(Customer newCustomer);
 
     //Updates the customer based off of custcode. Does not have to do anything with Orders!
     Customer updateCust(Customer customer, long id);

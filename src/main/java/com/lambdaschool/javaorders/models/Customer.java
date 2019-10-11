@@ -145,6 +145,12 @@ public class Customer {
         this.agent = agent;
     }
 
+    public List<Order> getOrders() {
+        return orders;
+    }
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
     public double getOutstandingamt() {
         return outstandingamt;
     }

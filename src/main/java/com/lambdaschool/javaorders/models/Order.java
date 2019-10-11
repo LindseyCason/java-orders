@@ -1,5 +1,7 @@
 package com.lambdaschool.javaorders.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +17,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "custcode", nullable = false)
+    @JsonIgnoreProperties("orders")
     private Customer customer;
 
     private String orddescription;
@@ -60,6 +63,9 @@ public class Order {
 //    public void setCustcode(long custcode) {
 ////        this.custcode = custcode;
 ////    }
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
     public String getOrddescription() {
         return orddescription;

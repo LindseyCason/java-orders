@@ -1,5 +1,6 @@
 package com.lambdaschool.javaorders.services;
 
+import com.lambdaschool.javaorders.models.Agent;
 import com.lambdaschool.javaorders.models.Customer;
 import com.lambdaschool.javaorders.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService
     }
     @Transactional
     @Override
-    public Customer addCust(Customer customer) {
+    public Customer save(Customer customer) {
         Customer newCustomer = new Customer();
         newCustomer.setCustname(customer.getCustname());
         newCustomer.setCustcity(customer.getCustcity());
@@ -65,9 +66,23 @@ public class CustomerServiceImpl implements CustomerService
         if(customer.getGrade() != null){
             currentCustomer.setGrade(customer.getGrade());
         }
-        if(customer.getOpeningamt() != null){
+        if(customer.getOpeningamt() != 0){
             currentCustomer.setOpeningamt(customer.getOpeningamt());
         }
+        if(customer.getReceiveamt() != 0){
+            currentCustomer.setReceiveamt(customer.getReceiveamt());
+        }
+        if(customer.getPaymentamt() != 0){
+            currentCustomer.setReceiveamt(customer.getReceiveamt());
+        }
+        if(customer.getOutstandingamt() !=0){
+            currentCustomer.setOutstandingamt(customer.getOutstandingamt());
+        }
+        if(customer.getPhone() != null){
+            currentCustomer.setPhone(currentCustomer.getPhone());
+        }
+
+        return custrepo.save(currentCustomer);
     }
 
     @Override

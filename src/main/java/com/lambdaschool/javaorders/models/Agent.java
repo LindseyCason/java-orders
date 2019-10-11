@@ -14,7 +14,7 @@ public class Agent {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long agentcode;
 
-//    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String agentname;
     private String workingarea;
     private double commission;
@@ -23,7 +23,7 @@ public class Agent {
 
 
     @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("agent")
+    @JsonIgnoreProperties("agents")
     private List<Customer> customers = new ArrayList<>();
 
     public Agent() {
