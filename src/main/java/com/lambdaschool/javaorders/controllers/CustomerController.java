@@ -32,5 +32,17 @@ public class CustomerController {
         customerService.addCust(newCustomer);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+    @DeleteMapping("/delete/{custcode}")
+    public ResponseEntity<?> deleteCustomer(@PathVariable long custcode)
+{
+    customerService.deleteCust(custcode);
+    return new ResponseEntity<>(HttpStatus.OK);
+}
+
+@PutMapping("/update/{custcode}")
+    public ResponseEntity<?> updateCustomer(@RequestBody Customer updateCustomer, @PathVariable long custcode){
+        customerService.updateCust(updateCustomer, custcode);
+        return new ResponseEntity<>(HttpStatus.OK);
+}
 
 }

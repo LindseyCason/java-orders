@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,12 +45,40 @@ public class CustomerServiceImpl implements CustomerService
     }
 
     @Override
+    @Transactional
     public Customer updateCust(Customer customer, long id) {
-        return null;
+
+        Customer currentCustomer = custrepo.findById(id).orElseThrow(() -> new EntityNotFoundException(Long.toString(id)));
+
+        if (customer.getCustname() != null){
+            currentCustomer.setCustname(customer.getCustname());
+        }
+        if( customer.getCustcity() != null){
+            currentCustomer.setCustcity(customer.getCustcity());
+        }
+        if(customer.getWorkingarea() != null){
+            currentCustomer.setWorkingarea(customer.getWorkingarea());
+        }
+        if(customer.getCustcountry() != null){
+            currentCustomer.setCustcountry(customer.getCustcountry());
+        }
+        if(customer.getGrade() != null){
+            currentCustomer.setGrade(customer.getGrade());
+        }
+        if(customer.getOpeningamt() != null){
+            currentCustomer.setOpeningamt(customer.getOpeningamt());
+        }
     }
 
     @Override
     public void deleteCust(long id) {
+
+        if (custrepo.findById(id).isPresent())
+        {
+            custrepo.deleteById(id);
+        }else{
+            throw new EntityNotFoundException(Long.toString(id));
+        }
 
     }
 }
