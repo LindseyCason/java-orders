@@ -2,6 +2,7 @@ package com.lambdaschool.javaorders.services;
 
 import com.lambdaschool.javaorders.models.Agent;
 import com.lambdaschool.javaorders.models.Customer;
+import com.lambdaschool.javaorders.models.Order;
 import com.lambdaschool.javaorders.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,10 @@ public class CustomerServiceImpl implements CustomerService
         newCustomer.setPaymentamt(customer.getPaymentamt());
         newCustomer.setOutstandingamt(customer.getOutstandingamt());
         newCustomer.setPhone(customer.getPhone());
+
+        for(Order o : customer.getOrders()){
+            newCustomer.getOrders().add(new Order(o.getOrdamount(), o.getAdvanceamount(), o.getCustomer(), o.getOrddescription()));
+        }
 
         return custrepo.save(newCustomer);
     }
